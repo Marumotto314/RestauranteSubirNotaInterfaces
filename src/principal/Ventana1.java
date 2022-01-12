@@ -58,7 +58,6 @@ public class Ventana1
 		// Ventana
 		ventana1 = new JFrame("Menú");
 		ventana1.setBounds(300, 300, 400, 300);
-		ventana1.setResizable(false);
 		ventana1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana1.setLayout(new BoxLayout(ventana1.getContentPane(), BoxLayout.Y_AXIS));
 		ventana1.add(Box.createVerticalGlue());
@@ -106,7 +105,7 @@ public class Ventana1
 		postreElegido = String.valueOf(comboPostre.getSelectedItem());
 		
 		// Cambiamos de ventana 
-		ventana1.setVisible(false);
+//		ventana1.setVisible(false);
 		Ventana2.hacerVisible();
 	}
 	public static void hacerVisible()

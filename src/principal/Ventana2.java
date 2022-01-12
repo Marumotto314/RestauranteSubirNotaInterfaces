@@ -20,6 +20,7 @@ public class Ventana2
 {
 	/***** Atributos *****/
 	private static JDialog ventana2;
+	private static JFrame padre;
 	
 	// Solo tendremos dos botones, el de confirmar y el de cancelar
 	private JButton confirmar;
@@ -29,6 +30,7 @@ public class Ventana2
     /***** Constructor *****/ 
 	public Ventana2(JFrame ventanaPadre)
 	{
+		padre = ventanaPadre;
 		/**** Añadimos los componenetes a sus respectivos paneles y después a la ventana ****/
 		// Ventana 2, tiene la misma configuración que el padre
 		ventana2 = new JDialog(ventanaPadre, "Confirmar comanda", true);
@@ -41,12 +43,12 @@ public class Ventana2
 		ventana2.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				Ventana1.reset();
-				Ventana1.hacerVisible();
+//				Ventana1.hacerVisible();
 				ventana2.setVisible(false);
 			}
 			public void windowClosed(WindowEvent e) {
 				Ventana1.reset();
-				Ventana1.hacerVisible();
+//				Ventana1.hacerVisible();
 				ventana2.setVisible(false);
 			}
 		});
@@ -88,7 +90,7 @@ public class Ventana2
 	{
 		ventana2.setVisible(false);
 		Ventana1.reset();
-		Ventana1.hacerVisible();
+//		Ventana1.hacerVisible();
 	}
 	public static void hacerVisible()
 	{

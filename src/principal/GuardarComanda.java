@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public abstract class GuardarComanda
 {
-	private static File comandas;
+	private static File directorioComandas;
 	private static final String FORMATO_XML = 
 			  "<comanda fecha=\"%s\">\r\n"
 			+ "	<primero>%s</primero>\r\n"
@@ -26,20 +26,27 @@ public abstract class GuardarComanda
 	 *  Funcionalidad básica, nos guarda el elemento comanda correctamente 
 	 *  Es necesario hacer modificaciones para que nos añada el elemento raíz del xml
 	 *  
-	 *  Para solucionar el tema del elemento raíz vamos a hacer que se cierre cuando la aplicación se cierra
-	 *  por el usuario y cuando se vuelva a inciar machacaremos el fichero.
-	 *  Podemos hac
+	 *  Creará una carpeta donde irá guardando las comandas
 	 */
 	public static void actualizarRegistro(String primero, String segundo, String postre)
 	{
 		try	{
+			directorioComandas = new File(".//Comandas");
+			if(!directorioComandas.exists())
+				directorioComandas.mkdir();
+			
+				
 			String fecha = fechaActual();
-			comandas = new File(".//RegistroComandas.xml");
+			/*
+			 * Utilizamos los milisegundos para que nunca haya dos comandas con el mismo nombre y la fecha
+			 * para que luego sea más fácil saber de que día son unas comandas sin tener que abrir el archivo
+			 */
+			String nombreFichero = ".//Comandas//Comanda " + fechaActual().substring(0, 10) + " "+ System.currentTimeMillis() + ".xml";
+			File comandas = new File(nombreFichero);
 
-			boolean creado = comandas.createNewFile();// Antes de crearlo comprueba si existe
-			FileOutputStream escritor = new FileOutputStream(comandas, true);
-			if(creado)
-				escritor.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n</registro>".getBytes());
+			comandas.createNewFile();// Antes de crearlo comprueba si existe
+			FileOutputStream escritor = new FileOutputStream(comandas);
+			escritor.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
 			escritor.write(String.format(FORMATO_XML, fecha, primero, segundo, postre).getBytes());
 			
 			escritor.close();
