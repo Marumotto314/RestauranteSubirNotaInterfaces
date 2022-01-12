@@ -1,11 +1,14 @@
 package principal;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,11 +27,13 @@ public class Ventana3
 	private static JLabel primero;
 	private static JLabel segundo;
 	private static JLabel postre;
+	private static JButton volver;
 	
 	// JPanels que contendr嫕 los JLabels
 	private static JPanel panelPrimero = new JPanel();
 	private static JPanel panelSegundo = new JPanel();
 	private static JPanel panelPostre = new JPanel();
+	private static JPanel panelVolver = new JPanel();
 	
     /***** Constructor *****/
 	public Ventana3()
@@ -42,45 +47,56 @@ public class Ventana3
 		// Al cerrarse la ventana2 al pulsar x vuelva a la ventana1
 		ventana3.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				Ventana1.reset();
-				reset();
-				Ventana1.hacerVisible();
-				ventana3.setVisible(false);
+				terminarResumen();
 			}
 			public void windowClosed(WindowEvent e) {
-				Ventana1.reset();
-				reset();
-				Ventana1.hacerVisible();
-				ventana3.setVisible(false);
+				terminarResumen();
 			}
 		});
 		
 		
 		// JLabels
-		primero = new JLabel("- Primero: ");
-		segundo = new JLabel("- Segundo: ");
-		postre = new JLabel("- Postre: ");
+		primero = new JLabel("感rimero: ");
+		segundo = new JLabel("惹egundo: ");
+		postre = new JLabel("感ostre: ");
+		
+		volver = new JButton("Volver");
+		volver.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent e)
+	         {
+				terminarResumen();
+	         }
+		});
 		
 		primero.setFont(fuente);
 		segundo.setFont(fuente);
 		postre.setFont(fuente);
+		volver.setFont(fuente);
 		
 		panelPrimero.add(primero);
 		panelSegundo.add(segundo);
 		panelPostre.add(postre);
+		panelVolver.add(volver);
 		
 		ventana3.add(panelPrimero);
 		ventana3.add(panelSegundo);
 		ventana3.add(panelPostre);
+		ventana3.add(panelVolver);
 	
 	}
 	
     /***** M彋odos *****/
 	public static void actualizarPlatos()
 	{
-		primero.setText("- Primero: " + Ventana1.getPrimeroElegido());
-		segundo.setText("- Segundo: " + Ventana1.getSegundoElegido());
-		postre.setText("- Postre: " + Ventana1.getPostreElegido());
+		primero.setText("感rimero: " + Ventana1.getPrimeroElegido());
+		segundo.setText("惹egundo: " + Ventana1.getSegundoElegido());
+		postre.setText("感ostre: " + Ventana1.getPostreElegido());
+	}
+	private static void terminarResumen()
+	{
+		Ventana1.reset();
+		reset();
+		ventana3.setVisible(false);
 	}
 	// Resetea los valores para la siguiente comanda
 	private static void reset()

@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 /**
  * Clase que será llamada por Principal para sacar por pantalla el resumen del pedido con formato csv,
