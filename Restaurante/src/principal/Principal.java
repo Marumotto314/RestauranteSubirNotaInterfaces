@@ -12,6 +12,7 @@ public class Principal
 	static Ventana1 v1;
 	static Ventana2 v2;
 	static Ventana3 v3;
+	static SeleccionPlato v4;
 	
 	public static void main(String[] args)
 	{
@@ -19,6 +20,7 @@ public class Principal
 		v1 = new Ventana1();
 		v2 = new Ventana2(Ventana1.getVentana());
 		v3 = new Ventana3();
+		v4 = new SeleccionPlato(Ventana1.getVentana());
 	}
 	/*
 	 * Utilizamos este método para que la ventana3 se generé cuando se haya confirmado el pedido, porque si la

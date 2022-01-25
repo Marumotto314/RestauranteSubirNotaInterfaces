@@ -32,16 +32,13 @@ public class Ventana1
 
 	// Primero
 	private static JLabel textoPrimero = new JLabel("Primero: ");
-	private static String platosPrimero[] = {" ", "Sopa", "Ensalada", "Potaje"};
-    private static JComboBox comboPrimero = new JComboBox(platosPrimero);
+	private static JButton botonPrimero = new JButton("Seleccionar");
     // Segundo 
     private static JLabel textoSegundo = new JLabel("Segundo: ");
-    private static String platosSegundo[] = {" ", "Filete", "Paella", "Filete de pollo"};
-    private static JComboBox comboSegundo = new JComboBox(platosSegundo);
+    private static JButton botonSegundo = new JButton("Seleccionar");
     // Postre
     private static JLabel textoPostre = new JLabel("Postre: ");
-    private static String platosPostre[] = {" ", "Helado", "Natillas", "Tarta"};
-    private static JComboBox comboPostre = new JComboBox(platosPostre);
+    private static JButton botonPostre = new JButton("Seleccionar");
     
     // Enviar a cocina
     private static JButton enviarCocina;
@@ -64,18 +61,36 @@ public class Ventana1
 		
 		// Primero
 		primero = new JPanel();
+		botonPrimero.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent e)
+	         {
+	            SeleccionPlato.recibirOpcion("primero");
+	         }
+		});
 		primero.add(textoPrimero);
-		primero.add(comboPrimero);
+		primero.add(botonPrimero);
 		
 		// Segundo 
 		segundo = new JPanel();
+		botonSegundo.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent e)
+	         {
+	            SeleccionPlato.recibirOpcion("segundo");
+	         }
+		});
 		segundo.add(textoSegundo);
-		segundo.add(comboSegundo);
+		segundo.add(botonSegundo);
 		
 		// Postre
 		postre = new JPanel();
+		botonPostre.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent e)
+	         {
+	            SeleccionPlato.recibirOpcion("postre");
+	         }
+		});
 		postre.add(textoPostre);
-		postre.add(comboPostre);
+		postre.add(botonPostre);
 		
 		// Enviar a cocina
 		terminar = new JPanel();
@@ -100,9 +115,9 @@ public class Ventana1
 	private void enviar()
 	{
 		// Antes de cambiar de ventanas guardaremos las opciones escogidas
-		primeroElegido = String.valueOf(comboPrimero.getSelectedItem());
-		segundoElegido = String.valueOf(comboSegundo.getSelectedItem());
-		postreElegido = String.valueOf(comboPostre.getSelectedItem());
+		primeroElegido = (botonPrimero.getText().equals("Seleccionar"))? "" : botonPrimero.getText();
+		segundoElegido = (botonSegundo.getText().equals("Seleccionar"))? "" : botonPrimero.getText();
+		postreElegido = (botonPostre.getText().equals("Seleccionar"))? "" : botonPrimero.getText();
 		
 		// Cambiamos de ventana 
 //		ventana1.setVisible(false);
@@ -117,9 +132,9 @@ public class Ventana1
 	 */
 	public static void reset()
 	{
-		comboPrimero.setSelectedIndex(0);
-		comboSegundo.setSelectedIndex(0);
-		comboPostre.setSelectedIndex(0);
+		botonPrimero.setText("Seleccionar");
+		botonSegundo.setText("Seleccionar");
+		botonPostre.setText("Seleccionar");
 		
 		primeroElegido = " ";
 		segundoElegido = " ";
