@@ -48,13 +48,17 @@ public class Ventana1
     private static String segundoElegido;
     private static String postreElegido;
     
+    // Tamaño ventana
+    static final int SIZE_X = 500;
+    static final int SIZE_Y = 400;
+    
     /***** Constructor *****/
 	public Ventana1()
 	{
 		/**** Añadimos los componenetes a sus respectivos paneles y después a la ventana ****/
 		// Ventana
 		ventana1 = new JFrame("Menú");
-		ventana1.setBounds(300, 300, 400, 300);
+		ventana1.setBounds(300, 300, SIZE_X, SIZE_Y);
 		ventana1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana1.setLayout(new BoxLayout(ventana1.getContentPane(), BoxLayout.Y_AXIS));
 		ventana1.add(Box.createVerticalGlue());
@@ -112,15 +116,37 @@ public class Ventana1
 	}
 	
     /***** Métodos *****/
+	/**
+	 * Recibe los platos elegidos
+	 * @param El plato que es [primero, segundo, postre]
+	 * @param platoEscogido
+	 */
+	public static void setPlatos(String plato, String platoEscogido)
+	{
+		switch(plato)
+		{
+			case "primero":
+				primeroElegido = platoEscogido;
+				botonPrimero.setText(platoEscogido);
+				break;
+			case "segundo":
+				botonSegundo.setText(platoEscogido);
+				segundoElegido = platoEscogido;
+				break;
+			case "postre":
+				botonPostre.setText(platoEscogido);
+				postreElegido = platoEscogido;
+				break;
+		}
+	}
 	private void enviar()
 	{
 		// Antes de cambiar de ventanas guardaremos las opciones escogidas
 		primeroElegido = (botonPrimero.getText().equals("Seleccionar"))? "" : botonPrimero.getText();
-		segundoElegido = (botonSegundo.getText().equals("Seleccionar"))? "" : botonPrimero.getText();
-		postreElegido = (botonPostre.getText().equals("Seleccionar"))? "" : botonPrimero.getText();
+		segundoElegido = (botonSegundo.getText().equals("Seleccionar"))? "" : botonSegundo.getText();
+		postreElegido = (botonPostre.getText().equals("Seleccionar"))? "" : botonPostre.getText();
 		
 		// Cambiamos de ventana 
-//		ventana1.setVisible(false);
 		Ventana2.hacerVisible();
 	}
 	public static void hacerVisible()
@@ -142,16 +168,6 @@ public class Ventana1
 	}
 	
 	// Getters
-	/**
-	 * Configurará el JDialog recibido por parámetros para darle los mismos valores que posee el JFrame padre
-	 * @param obj
-	 */
-	public static void obtenerConfiguracion(JDialog obj)
-	{
-		obj.setResizable(false);
-		obj.setBounds(ventana1.getX(), ventana1.getY(), 400, 300);
-		obj.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-	}
 	public static JFrame getVentana()
 	{
 		return ventana1;

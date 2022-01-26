@@ -2,6 +2,8 @@ package main;
 
 import java.io.File;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Recibirá por argumentos el directorio comandas para posteriormente
@@ -20,8 +22,14 @@ public class Lectura
 	
 		String comandas[] = carpetaComandas.list();
 		
+		// Creamos una expresion regular para que solo sean leídos los ficheros que la cumplan
+		Pattern pat = Pattern.compile("^Comanda.*xml$");
+		
 		for(String nombreComanda : comandas)
 		{
+			Matcher mat = pat.matcher(nombreComanda);
+			if(!mat.matches())
+				continue;
 			System.out.println(nombreComanda);
 			File comanda = new File(rutaComandas + "\\" + nombreComanda);
 			Scanner lector = new Scanner(comanda);

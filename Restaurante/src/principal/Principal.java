@@ -22,6 +22,7 @@ public class Principal
 		v3 = new Ventana3();
 		v4 = new SeleccionPlato(Ventana1.getVentana());
 	}
+
 	/*
 	 * Utilizamos este método para que la ventana3 se generé cuando se haya confirmado el pedido, porque si la
 	 * creamos antes cogerá los valores que haya al instanciar las opciones que no es ninguno

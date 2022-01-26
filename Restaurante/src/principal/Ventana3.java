@@ -1,5 +1,6 @@
 package principal;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -35,12 +37,17 @@ public class Ventana3
 	private static JPanel panelPostre = new JPanel();
 	private static JPanel panelVolver = new JPanel();
 	
+	// Tamaño ventana
+	static final int SIZE_X = 400;
+	static final int SIZE_Y = 300;
+	
     /***** Constructor *****/
 	public Ventana3()
 	{
 		// Ventana 3
 		ventana3 = new JDialog(Ventana1.getVentana(), "Resúmen", true);
-		Ventana1.obtenerConfiguracion(ventana3);
+		ventana3.setBounds(Ventana1.getVentana().getX(), Ventana1.getVentana().getY(), SIZE_X, SIZE_Y);
+		ventana3.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		Font fuente = new Font("Arial", Font.PLAIN, 20);
 		ventana3.setLayout(new BoxLayout(ventana3.getContentPane(), BoxLayout.Y_AXIS));
 		ventana3.add(Box.createVerticalGlue());
@@ -107,7 +114,14 @@ public class Ventana3
 	}
 	public static void hacerVisible()
 	{
-		ventana3.setLocation(Ventana1.getVentana().getX(), Ventana1.getVentana().getY());
+		/*
+		 * Las coodenadas del dialogo se desplazan según se desplaze el padre
+		 */
+		JFrame padre = Ventana1.getVentana();
+		Dimension d = padre.getSize();
+		int coordX = padre.getX() + (int)d.getWidth() / 2 - SIZE_X/2;
+		int coordY = padre.getY() + (int)d.getHeight() / 2 - SIZE_Y/2;
+		ventana3.setLocation(coordX, coordY);
 		ventana3.setVisible(true);
 	}
 }
